@@ -6,6 +6,11 @@ import Navbar from "@/components/Navbar";
 
 export const metadata = {
   title: "Hostel Finder",
+  icons:{
+    icon:"/icon.png",
+    shortcut: "/icon.png",
+    apple: "/icon.png",
+  },
   description: "Find hostels near your preferred location",
 };
 
