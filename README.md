@@ -1,36 +1,190 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# 🏠 **HostelFinder – Hostel / PG Finder Web Application**
 
-## Getting Started
+A modern, responsive, and fast **Hostel / PG Finder web application** built using **Next.js 16**, **TailwindCSS**, and **SerpAPI (Google Maps API)**.
+Users can search any location and view nearby hostels/PGs with detailed information such as rating, reviews, and map navigation.
 
-First, run the development server:
+This project features a clean UI, secure backend API handling, and fully responsive pages.
+
+---
+
+## 🚀 **Features**
+
+* 🔍 Search hostels/PGs by entering any location
+* 📍 Fetches real hostel data using Google Maps + SerpAPI
+* ⭐ Shows ratings, reviews & categories
+* 🖥 Fully responsive design (mobile/tablet/desktop)
+* 🔐 Secure backend API (SerpAPI key NOT exposed)
+* 🧭 Includes Home, Hostel Results, Hostel Details, About Page
+* 🧩 Clean component structure with reusable Navbar
+
+---
+
+## 🛠️ **Tech Stack**
+
+| Technology                  | Description            |
+| --------------------------- | ---------------------- |
+| **Next.js 16 (App Router)** | Routing + Backend APIs |
+| **React**                   | UI components          |
+| **TailwindCSS**             | Styling                |
+| **SerpAPI (Google Maps)**   | Fetching place results |
+| **Vercel**                  | Deployment             |
+
+---
+
+## 📁 **Project Folder Structure**
+
+Your current folder structure:
+
+```
+HOSTEL-FINDER/
+│
+├── public/
+│
+├── src/
+│   ├── api/
+│   │   └── api.js                # API helper for fetching hostel data
+│   │
+│   ├── app/
+│   │   ├── about/
+│   │   │   └── page.jsx          # About Page
+│   │   │
+│   │   ├── hostel\[data_id]/
+│   │   │   └── page.jsx          # Hostel Details Page
+│   │   │
+│   │   ├── hostels/
+│   │   │   └── page.js           # Hostels list page (search results)
+│   │   │
+│   │   ├── globals.css           # Global CSS
+│   │   ├── layout.js             # Root Layout
+│   │   └── page.js               # Home Page
+│   │
+│   ├── components/
+│   │   └── Navbar.jsx            # Navigation Bar
+│
+├── .env                          # SerpAPI key (DO NOT PUSH)
+├── .gitignore
+├── next.config.mjs
+├── package.json
+└── README.md
+```
+
+---
+
+## 🔐 **Environment Variables (Important)**
+
+Create a **.env** file and add:
+
+```
+SERPAPI_KEY=your_serpapi_key_here
+```
+
+⚠️ Do NOT expose your API key in frontend code.
+This project uses backend helper functions, so your key stays secure.
+
+---
+
+# ⚙️ **Getting Started**
+
+## 1️⃣ Clone the Repository
+
+```bash
+git clone https://github.com/your-username/hostel-finder.git
+cd hostel-finder
+```
+
+## 2️⃣ Install Dependencies
+
+```bash
+npm install
+```
+
+## 3️⃣ Add Environment Variable
+
+Create `.env`:
+
+```
+SERPAPI_KEY=your_serpapi_key_here
+```
+
+## 4️⃣ Start Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit:
+👉 **[http://localhost:3000](http://localhost:3000)**
 
-You can start editing the page by modifying `app/page.js`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+# 📡 **API Flow**
 
-## Learn More
+```
+User Search → Backend api.js → SerpAPI → Results → UI Rendering
+```
 
-To learn more about Next.js, take a look at the following resources:
+✔ Keeps API key secure
+✔ Prevents misuse
+✔ Works perfectly on Vercel deployment
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+---
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+# 🖥️ **Pages Overview**
 
-## Deploy on Vercel
+### 🏡 Home Page (`src/app/page.js`)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+* Clean modern UI
+* Search bar for entering location
+* Responsive layout
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+### 🏨 Hostels List Page (`src/app/hostels/page.js`)
+
+* Shows hostels based on location
+* Shows name, category, rating, distance
+
+### 📘 Hostel Details Page (`src/app/hostel/[data_id]/page.jsx`)
+
+* Detailed info
+* Images, rating, reviews
+* Google Maps button
+
+### ℹ About Page (`src/app/about/page.jsx`)
+
+* Simple About information
+* Purpose + project goal
+
+### 📌 Navbar (`src/components/Navbar.jsx`)
+
+* Clean navigation
+* Home + About links
+
+---
+
+# 🚀 **Deployment (Vercel Recommended)**
+
+1. Push project to GitHub
+2. Go to **vercel.com** → Import Repository
+3. Add environment variable in Vercel Dashboard:
+
+```
+SERPAPI_KEY=your_key_here
+```
+
+4. Click **Deploy**
+5. Done 🎉
+
+---
+
+# 🧑‍💻 **Author**
+
+**Prathamesh Wadekar**
+Full Stack Developer | Android Developer
+📧 Open for collaborations & improvements
+
+---
+
+# ⭐ **Support**
+
+If you like this project, please give it a ⭐ on GitHub!
+
+---
