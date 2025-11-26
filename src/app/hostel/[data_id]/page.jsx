@@ -5,56 +5,57 @@ import React from "react";
 
 export default async function page({ params, searchParams }) {
   const { data_id } = await params;
-
-  const par =  await searchParams;
+  const par = await searchParams;
 
   const details = await getHostelDetails(data_id, par.lat, par.lng);
 
   return (
-    <main className="max-w-5xl mx-auto p-6 space-y-10">
-      {/* HEADER */}
+    <main className="max-w-5xl mx-auto px-4 py-6 space-y-10">
       <section className="space-y-2">
-        <h1 className="text-4xl font-extrabold text-gray-900 leading-tight">
+        <h1 className="text-3xl sm:text-4xl font-extrabold text-gray-900 leading-snug">
           {details.title}
         </h1>
 
-        <p className="text-blue-600 font-semibold text-lg">
+        <p className="text-blue-600 font-semibold text-base sm:text-lg">
           {details.type?.join(", ")}
         </p>
 
-        <div className="flex items-center gap-3 mt-1">
-          <div className="flex items-center gap-1 text-yellow-500 text-xl font-bold">
+        <div className="flex flex-wrap items-center gap-3 mt-1">
+          <div className="flex items-center gap-1 text-yellow-500 text-lg sm:text-xl font-bold">
             ⭐ {details.rating}
           </div>
-          <span className="text-gray-600">{details.reviews} reviews</span>
+          <span className="text-gray-600 text-sm sm:text-base">
+            {details.reviews} reviews
+          </span>
         </div>
       </section>
 
-      {/* INFO CARD */}
-      <section className="bg-white shadow-md rounded-2xl p-6 space-y-3 border border-gray-100">
+      <section className="bg-white shadow-md rounded-2xl p-5 sm:p-6 space-y-4 border border-gray-100">
         <div className="flex items-start gap-3">
           <span className="text-2xl">📍</span>
-          <p className="text-gray-800 leading-relaxed">
+          <p className="text-gray-800 leading-relaxed text-sm sm:text-base">
             <span className="font-semibold">Address:</span> {details.address}
           </p>
         </div>
 
-        <div className="flex items-start gap-3">
-          <span className="text-2xl">📞</span>
-          <p className="text-gray-800">
-            <span className="font-semibold">Contact:</span> {details.phone}
-          </p>
-        </div>
+        {details.phone && (
+          <div className="flex items-start gap-3">
+            <span className="text-2xl">📞</span>
+            <p className="text-gray-800 text-sm sm:text-base">
+              <span className="font-semibold">Contact:</span> {details.phone}
+            </p>
+          </div>
+        )}
 
         {details.website && (
           <div className="flex items-start gap-3">
             <span className="text-2xl">🌐</span>
-            <p className="text-gray-800">
+            <p className="text-gray-800 text-sm sm:text-base break-words">
               <span className="font-semibold">Website:</span>{" "}
               <Link
                 href={details.website}
                 target="_blank"
-                className="text-blue-600 underline hover:text-blue-800"
+                className="text-blue-600 underline hover:text-blue-800 break-all"
               >
                 {details.website}
               </Link>
@@ -63,11 +64,10 @@ export default async function page({ params, searchParams }) {
         )}
       </section>
 
-      {/* PHOTOS */}
       <section>
-        <h2 className="text-2xl font-bold mb-4">Photos</h2>
+        <h2 className="text-xl sm:text-2xl font-bold mb-4">Photos</h2>
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+        <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-4">
           {details.images?.map((img, index) => (
             <div
               key={index}
@@ -78,38 +78,39 @@ export default async function page({ params, searchParams }) {
                 alt="Hostel Photo"
                 width={400}
                 height={300}
-                className="object-cover w-full h-48 hover:scale-105 transition-transform duration-300"
+                className="object-cover w-full h-36 sm:h-48 hover:scale-105 transition-transform duration-300"
               />
             </div>
           ))}
         </div>
       </section>
 
-      {/* RATING BREAKDOWN */}
       <section>
-        <h2 className="text-2xl font-bold mb-4">Rating Breakdown</h2>
+        <h2 className="text-xl sm:text-2xl font-bold mb-4">Rating Breakdown</h2>
 
-        <div className="space-y-2">
+        <div className="space-y-3">
           {details.rating_summary?.map((r, index) => (
-            <div key={index} className="flex items-center gap-4">
-              <span className="w-14 font-semibold">{r.stars} ⭐</span>
+            <div
+              key={index}
+              className="flex items-center gap-3 sm:gap-4 text-sm sm:text-base"
+            >
+              <span className="w-12 sm:w-14 font-semibold">{r.stars} ⭐</span>
 
-              <div className="w-full bg-gray-200 h-3 rounded-full overflow-hidden">
+              <div className="w-full bg-gray-200 h-2.5 sm:h-3 rounded-full overflow-hidden">
                 <div
-                  className="bg-blue-500 h-3 rounded-full"
+                  className="bg-blue-500 h-full rounded-full"
                   style={{ width: `${r.amount}%` }}
                 ></div>
               </div>
 
-              <span className="text-gray-700 w-8 text-right">{r.count}</span>
+              <span className="text-gray-700 w-8 text-right">{r.amount}</span>
             </div>
           ))}
         </div>
       </section>
 
-      {/* USER REVIEWS */}
       <section>
-        <h2 className="text-2xl font-bold mb-4">User Reviews</h2>
+        <h2 className="text-xl sm:text-2xl font-bold mb-4">User Reviews</h2>
 
         <div className="space-y-4">
           {details.user_reviews?.most_relevant
@@ -118,14 +119,16 @@ export default async function page({ params, searchParams }) {
             ?.map((review, index) => (
               <div
                 key={index}
-                className="p-5 border rounded-xl bg-white shadow-sm hover:shadow-md transition"
+                className="p-4 sm:p-5 border rounded-xl bg-white shadow-sm hover:shadow-md transition"
               >
-                <div className="flex items-center justify-between">
+                <div className="flex flex-wrap items-center justify-between gap-2">
                   <p className="font-semibold text-lg">{review.username}</p>
-                  <p className="text-yellow-500 font-bold">⭐ {review.rating}</p>
+                  <p className="text-yellow-500 font-bold">
+                    ⭐ {review.rating}
+                  </p>
                 </div>
 
-                <p className="mt-2 text-gray-700 leading-relaxed">
+                <p className="mt-2 text-gray-700 leading-relaxed text-sm sm:text-base">
                   {review.description}
                 </p>
               </div>
